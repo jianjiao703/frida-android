@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.js"></script>
+
+</head>
+<style>
+		body {
+			/* border: 1px solid red; */
+			min-height: 100vh;
+		}
+
+		#src_p2 {
+			margin: 0.25rem;
+		}
+
+		.item_box {
+			float: left;
+			width: 100%;
+			margin-top: 0.6rem;
+			margin: 0.5rem;
+
+
+		}
+
+		.tops {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+		}
+
+		.from-title {
+			width: 7rem;
+		}
+	</style>
+<body>
+<div class="alert alert-success tops" style="display: none;z-index:99999" id="is_root" role="alert">
+    设备已取得ROOT权限，运行拼多多可直接进行采集</div>
+<div class="alert alert-danger" style="display: none;z-index:99999" id="not_root" role="alert">
+    当前设备未取得ROOT权限，无法正常使用</div>
+<div class="alert alert-danger" style="display: none;z-index:99999" id="toastError" role="alert">...</div>
+<div class="alert alert-info tops" style="display: none; z-index:99999" id="toast" role="alert">...</div>
+<div style="padding:1rem;">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">哆唻咪Wechat版</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- <p><b><span class="label label-success">账号令牌</span> </b><span
+                    style="color:#3a3a3a">通过多多解析软件（电脑版）上可查看到该令牌，只要用于计费及获取商品使用！</span></p> -->
+            <p><b><span class="label label-success">注入代码</span> </b><span
+                    style="color:#3a3a3a">点击注入代码后，打开微信，打开拼多多网址即可开始自动解析</span></p>
+            <div class="input-group">
+                <span class="input-group-addon">账号：</span>
+                <input type="text" class="form-control" id="analyToken" aria-describedby="basic-addon3">
+            </div>
+            <div style="margin-top:10px;width: 100%;">
+                <button style="width: 100%;" type="button" onClick="inject()"
+                        class="btn btn-success">注入微信（网页版）</button>
+            </div>
+            <!-- <p style="margin-top:0.5rem;">
+                <button type="button" onClick="window.android.JS_analt_wechat()"
+                    class="btn btn-success">注入微信（网页版）</button>
+                <button type="button" onClick="window.android.JS_analt_miniprogram()"
+                    class="btn btn-success">注入微信（小程序）</button>
+            </p> -->
+        </div>
+    </div>
+</div>
+<script src="js/list_ui.js"></script>
+<script>
+function inject(){
+    const userId=$("#analyToken").val();
+    window.android.JS_analt_wechat(userId)
+}
+			function showRootd() {
+				setTimeout(function() {
+					$("#is_root").fadeIn(200);
+					setTimeout(function() {
+						$("#is_root").fadeOut(200);
+					}, 2000)
+				}, 1000)
+			}
+
+			function showNotRoot() {
+				setTimeout(function() {
+					$("#not_root").fadeIn(200);
+					setTimeout(function() {
+						$("#not_root").fadeOut(200);
+					}, 2000)
+				}, 1000)
+			}
+
+			function showToast(text) {
+				$("#toast").text(text);
+				$("#toast").fadeIn(200);
+				setTimeout(function() {
+					$("#toast").fadeOut(200);
+				}, 1500)
+			}
+
+			function showToastError(text) {
+				$("#toastError").text(text);
+				$("#toastError").fadeIn(200);
+				setTimeout(function() {
+					$("#toastError").fadeOut(200);
+				}, 1500)
+
+			}
+
+
+
+
+			$(document).ready(function() {
+
+				//检查是否已root
+				setTimeout(function() {
+					var isRoot = window.android.JS_getIsRoot();
+					if (isRoot) {
+						showRootd();
+					} else {
+						showNotRoot();
+					}
+
+				}, 1000)
+			});
+		</script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">哆唻咪</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="xposed_description">强制使用微信平板模式</string>
+    <array name="xposed_scope">
+        <item>com.tencent.mm</item>
+    </array>
+</resources>
